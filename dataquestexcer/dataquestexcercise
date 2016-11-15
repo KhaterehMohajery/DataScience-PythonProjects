@@ -1,0 +1,17 @@
+# This is an excercise to handle data base from SQl and basic manipulation of data base in python
+import os
+import pandas as pd
+import math
+import sqlite3
+
+os.chdir('/Users/khaterehmohajery1/Documents/DataScience/DataScience-PythonProjects/dataquestexcer')
+conn = sqlite3.connect('factbook.db')
+query = "select * from facts;"
+df = pd.read_sql_query(query, con = conn)
+conn.close()
+# To calculate the population of a a country in n years from now
+def pop_growth(country, year):
+    db = df[['name','population', 'population_growth']]
+    #db = df.loc[:, ['name','population', 'population_growth']] does the same thing
+    data = db.loc[db['name'] == str(country)]
+    
